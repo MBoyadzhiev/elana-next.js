@@ -27,8 +27,12 @@ const ClientsPage = async () => {
         <Table.Body>
           {clients.map((client) => (
             <Table.Row key={client.id}>
-              <Table.Cell>{client.first_name}</Table.Cell>
-              <Table.Cell>{client.last_name}</Table.Cell>
+              <Table.Cell>
+                <Link href={`/clients/${client.id}`}>{client.first_name}</Link>
+              </Table.Cell>
+              <Table.Cell>
+                <Link href={`/clients/${client.id}`}>{client.last_name}</Link>
+              </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
                 {client.email}
               </Table.Cell>

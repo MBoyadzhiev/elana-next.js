@@ -15,6 +15,17 @@ model Client {
   status      Status   @default(ACTIVE)
   date_joined DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  logs ClientLog[]
+}
+
+model ClientLog {
+  id          Int      @id @default(autoincrement())
+  log_created DateTime @default(now())
+  log_message String   @db.Text
+  clientId    Int
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 }
 
 enum Status {
