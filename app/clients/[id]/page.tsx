@@ -17,25 +17,30 @@ const ClientLogPage = async ({ params }: Props) => {
     },
   });
 
-  if (log.length === 0) notFound();
-
   return (
     <div>
       <Heading>Logs for Client {params.id}</Heading>
-      <ul>
-        {log.map((log) => (
-          <Flex gap="4" my="4" key={log.id}>
-            {" "}
-            <li key={log.id}>
-              <Card>{log.log_message}</Card>
-              <p>
-                {" "}
-                Created at {new Date(log.log_created).toLocaleString()}
-              </p>{" "}
-            </li>
-          </Flex>
-        ))}
-      </ul>
+
+      {log.length === 0 ? (
+        <Flex gap="4" my="4">
+          <Card>There are no logs for the selected user.</Card>
+        </Flex>
+      ) : (
+        <ul>
+          {log.map((log) => (
+            <Flex gap="4" my="4" key={log.id}>
+              {" "}
+              <li key={log.id}>
+                <Card>{log.log_message}</Card>
+                <p>
+                  {" "}
+                  Created at {new Date(log.log_created).toLocaleString()}
+                </p>{" "}
+              </li>
+            </Flex>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
