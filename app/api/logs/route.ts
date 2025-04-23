@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     return new Response("Missing required fields", { status: 400 });
   }
 
-  const newLog = await prisma.clientLog.create({
+  const newLog = await prisma.clientlog.create({
     data: {
       clientId: parseInt(clientId),
       log_message,

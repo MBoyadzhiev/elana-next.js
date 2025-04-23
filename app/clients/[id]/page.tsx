@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ClientLogPage = async ({ params }: Props) => {
-  const log = await prisma.clientLog.findMany({
+  const log = await prisma.clientlog.findMany({
     where: { clientId: parseInt(params.id) },
     orderBy: { log_created: "asc" },
   });
