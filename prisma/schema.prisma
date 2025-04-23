@@ -68,7 +68,7 @@ model client {
   email       String        @unique(map: "Client_email_key")
   status      client_status @default(ACTIVE)
   date_joined DateTime      @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime      @updatedAt
   clientlog   clientlog[]
 }
 
