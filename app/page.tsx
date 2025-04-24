@@ -1,3 +1,5 @@
+import LatestClients from "./LatestClients";
+
 export default function Home() {
-  return <div> Hello</div>;
+  return <LatestClients />;
 }
