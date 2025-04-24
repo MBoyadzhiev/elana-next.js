@@ -17,3 +17,21 @@ export async function POST(request: NextRequest) {
   });
   return NextResponse.json(newClient, { status: 201 });
 }
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const page = parseInt(searchParams.get("page") || "1");
+  const size = parseInt(searchParams.get("size") || "10");
+  const skip = (page - 1) * size;
+
+  const [clients, total] = await Promise.all([
+    prisma.client.findMany({
+      skip,
+      take: size,
+      orderBy: { date_joined: "desc" },
+    }),
+    prisma.client.count(),
+  ]);
+
+  return NextResponse.json({ clients, total });
+}
