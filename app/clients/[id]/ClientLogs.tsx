@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Card, Flex, Button, TextField } from "@radix-ui/themes";
-import ClientDeleteButton from "./ClientDeleteButton";
+import ClientDeleteButton from "../_components/ClientDeleteButton";
+import ClientEditButton from "../_components/ClientEditButton";
 
 interface Log {
   id: number;
@@ -99,6 +100,7 @@ const ClientLogs = ({
         </ul>
       )}
       <ClientDeleteButton clientId={clientId} />
+      <ClientEditButton clientId={clientId}/>
     </Flex>
   );
 };

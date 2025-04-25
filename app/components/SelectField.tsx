@@ -2,11 +2,11 @@
 
 import * as Select from "@radix-ui/react-select";
 import React, { useState } from "react";
-import { createClientSchema } from "@/app/validationSchemas";
+import { clientSchema } from "@/app/validationSchemas";
 import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { z } from "zod";
 
-export type IssueForm = z.infer<typeof createClientSchema>;
+export type IssueForm = z.infer<typeof clientSchema>;
 
 interface Option {
   label: string;
