@@ -3,7 +3,7 @@ import React from "react";
 import ClientStatusBadge from "../components/ClientStatusBadge";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import ClientActions from "./ClientActions";
+import ClientActions from "./list/ClientActions";
 
 const LoadingClientsPage = () => {
   const clients = [1, 2, 3, 4, 5];
