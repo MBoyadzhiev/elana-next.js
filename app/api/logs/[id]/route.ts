@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function DELETE(
   _: Request,
@@ -10,7 +10,7 @@ export async function DELETE(
     return new Response("Invalid log ID", { status: 400 });
   }
 
-  await prisma.clientLog.delete({
+  await prisma.clientlog.delete({
     where: { id: logId },
   });
 
