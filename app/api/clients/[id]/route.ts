@@ -1,5 +1,5 @@
 import authOptions from "@/app/auth/authOptions";
-import { createClientSchema } from "@/app/validationSchemas";
+import { clientSchema } from "@/app/validationSchemas";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
@@ -15,16 +15,18 @@ export async function PATCH(reuqest: NextRequest, {params}: Props)
     if(!session) return NextResponse.json({error: 'Unauthorized'}, {status: 401});
 
     const body = await reuqest.json();
-    const validation = createClientSchema.safeParse(body);
+    const validation = clientSchema.safeParse(body);
 
     if(!validation.success) return NextResponse.json(validation.error.errors, {status: 400});
+
+    const { first_name, last_name, email, status } = body;
 
     const clientId = await parseInt(params.id);
     const client  = await prisma.client.findUnique({where:{id:clientId}});
     
     if(!client) return NextResponse.json({error: 'Client not found'}, {status: 404});
 
-    const updatedClient = await prisma.client.update({where:{id:clientId}, data:validation.data});
+    const updatedClient = await prisma.client.update({where:{id:clientId}, data:{first_name, last_name, email, status}});
     return NextResponse.json(updatedClient);
 }
 

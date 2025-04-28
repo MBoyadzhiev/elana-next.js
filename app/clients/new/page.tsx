@@ -111,7 +111,7 @@
 import FormField from "@/app/components/FormField";
 import SelectField from "@/app/components/SelectField";
 import Spinner from "@/app/components/Spinner";
-import { createClientSchema } from "@/app/validationSchemas";
+import { clientSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Callout } from "@radix-ui/themes";
 import axios from "axios";
@@ -120,7 +120,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-type IssueForm = z.infer<typeof createClientSchema>;
+type IssueForm = z.infer<typeof clientSchema>;
 
 const statusOptions = [
   { label: "Active", value: "ACTIVE" },
@@ -136,7 +136,7 @@ const NewClientPage = () => {
     formState: { errors },
     setValue,
   } = useForm<IssueForm>({
-    resolver: zodResolver(createClientSchema),
+    resolver: zodResolver(clientSchema),
   });
   const [error, setError] = useState(""); // This is your error state
   const [isSubmitting, setSubmitting] = useState(false);
