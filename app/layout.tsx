@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./NavBar";
 import AuthProvider from "./auth/Provider";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,9 @@ export default function RootLayout({
         <Theme>
           <AuthProvider>
             <NavBar />
-            <main className="m-3">{children}</main>
+            <Suspense fallback={<div>Loading...</div>}>
+              <main className="m-3">{children}</main>
+            </Suspense>
           </AuthProvider>
         </Theme>
       </body>
