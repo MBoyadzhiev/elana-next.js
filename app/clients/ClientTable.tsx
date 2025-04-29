@@ -6,13 +6,14 @@ import { Table, Flex } from "@radix-ui/themes";
 import Link from "../components/Link";
 import ClientStatusBadge from "../components/ClientStatusBadge";
 import Pagination from "../components/Pagination";
+import { client_status } from "@prisma/client";
 interface Client {
   id: number;
   first_name: string;
   last_name: string;
   email: string;
   date_joined: string;
-  status: string;
+  status: client_status;
 }
 
 const ClientTable = () => {
@@ -50,18 +51,6 @@ const ClientTable = () => {
     router.push(`?${params.toString()}`);
   };
 
-  // useEffect(() => {
-  //   const fetchClients = async () => {
-  //     const res = await fetch(
-  //       `/api/clients?page=${currentPage}&size=${pageSize}&status=${statusFilter}&orderBy=${orderBy}&order=${order}&search=${searchTerm}`
-  //     );
-  //     const data = await res.json();
-  //     setClients(data.clients);
-  //     setTotalClients(data.total);
-  //   };
-  //   fetchClients();
-  // }, [currentPage, statusFilter, orderBy, order, searchTerm]);
-
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -74,7 +63,7 @@ const ClientTable = () => {
         setTotalClients(data.total);
       } catch (error) {
         console.error("Client fetch error:", error);
-        setClients([]); // fallback
+        setClients([]);
       }
     };
     fetchClients();
